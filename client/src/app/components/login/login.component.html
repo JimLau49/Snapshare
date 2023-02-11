@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="login-container">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form-field">
+            <input matInput type="email" formControlName="email" placeholder="Email">
+            <mat-error *ngIf="f['email'].invalid && submitted">
+              <mat-error *ngIf="f['email'].errors?.['required']">Email is required</mat-error>
+              <mat-error *ngIf="f['email'].errors?.['email']">Email is not valid</mat-error>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <input matInput type="password" formControlName="password" placeholder="Password">
+            <mat-error *ngIf="f['password'].invalid && submitted">
+              <mat-error *ngIf="f['password'].errors?.['required']">Password is required</mat-error>
+            </mat-error>
+          </mat-form-field>
+        <div class="form-actions">
+            <button mat-raised-button color="primary" [disabled]="loading" type="submit">
+              login
+            </button>
+            <mat-spinner *ngIf="loading"></mat-spinner>
+          </div>
+    </form>
+</div>
