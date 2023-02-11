@@ -1,0 +1,25 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    h2 {
+      margin-top: 40px;
+    }
+  
+    .form-field {
+      width: 100%;
+      margin-top: 20px;
+    }
+  
+    .form-actions {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      button {
+        width: 150px;
+      }
+    }
+  }
