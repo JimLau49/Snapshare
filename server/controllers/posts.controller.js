@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
   const post = new Post({
     title: req.body.title || 'Untitled Post',
     content: req.body.content,
-    image: req.file.buffer,
+    image: req.file.path,
   });
 
   try {
