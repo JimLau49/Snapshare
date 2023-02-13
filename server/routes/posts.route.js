@@ -1,10 +1,11 @@
 const express = require('express');
-const express = require('express');
-const postController = require('../controllers/post.controller');
+const PostsController = require('../controllers/posts.controller');
+const Auth = require('../auth/auth');
+
 const router = express.Router();
 
-router.post('/create', postController.createPost);
-router.get('/:id', postController.getPost);
-router.get('/', postController.getAllPosts);
+router.post('/', Auth.authenticateJWT, PostsController.create);
+router.get('/', Auth.authenticateJWT, PostsController.getAllPosts);
+router.get('/:id', Auth.authenticateJWT, PostsController.getPost);
 
 module.exports = router;
