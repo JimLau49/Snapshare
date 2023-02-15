@@ -11,24 +11,6 @@ import moment from 'moment';
 export class HomeComponent {
 
   posts: Post[] = [];
-  // posts: Array<Post> = [
-  //   {
-  //     title: 'Test Post 1',
-  //     date: moment("2022-01-01").toDate(),
-  //     imagePath: "http://localhost:3000/uploads/1676429156237.jpg"
-
-  //   },
-    // {
-    //   title: 'Test Post 2',
-    //   date: moment("2022-01-01").toDate(),
-    //   imagePath: '/client/src/images/test-image.jpg'
-    // },
-    // {
-    //   title: 'Test Post 3',
-    //   date: moment("2022-01-01").toDate(),
-    //   imagePath: '/client/src/images/test-image.jpg'
-    // }
-  // ];
 
   constructor(private postService: PostService) { }
 
@@ -38,7 +20,7 @@ export class HomeComponent {
         this.posts = data.posts.map(post => {
           return {
             ...post,
-            imagePath: `http://localhost:3000${post.imagePath}`
+            imagePath: `http://localhost:3000\\${post.imagePath}`
           }
         });
       }
