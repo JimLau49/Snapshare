@@ -1,11 +1,22 @@
 const express = require('express');
 const PostsController = require('../controllers/posts.controller');
 const Auth = require('../auth/auth');
+const multer = require('multer');
 
-const router = express.Router();
+const route = express.Router();
 
-router.post('/', Auth.authenticateJWT, PostsController.create);
-router.get('/', Auth.authenticateJWT, PostsController.getAllPosts);
-router.get('/:id', Auth.authenticateJWT, PostsController.getPost);
+route.post(
+  '/create',
+  Auth.authenticateJWT,
+  PostsController.upload,
+  PostsController.create
+);
 
-module.exports = router;
+route.get('/', Auth.authenticateJWT, PostsController.getAllPosts);
+route.get(
+  '/user/:username',
+  Auth.authenticateJWT,
+  PostsController.getPostsByUser
+);
+
+module.exports = route;
