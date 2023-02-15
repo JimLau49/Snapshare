@@ -35,9 +35,13 @@ const register = async (req, res) => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    });
+    const token = jwt.sign(
+      { id: user._id, username: username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1h',
+      }
+    );
 
     return res.status(200).json({
       message: 'User registered successfully',
@@ -63,9 +67,15 @@ const login = async (req, res) => {
       return res.status(400).json({ error: 'Email or password is incorrect' });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    });
+    const username = user.username;
+
+    const token = jwt.sign(
+      { id: user._id, username: username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1h',
+      }
+    );
 
     return res.status(200).json({
       message: 'Login successful',
