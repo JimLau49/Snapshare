@@ -12,7 +12,7 @@ const register = async (req, res) => {
       return res.status(400).json({ error: 'Email already exists' });
     }
     if (!email || !password) {
-      return res.status(400).json({ msg: 'Please enter email and password' });
+      return res.status(400).json({ msg: 'Email or Password field is empty' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

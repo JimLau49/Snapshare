@@ -1,43 +1,73 @@
-const Post = require('../models/post.model');
+const Posts = require('../models/posts.model');
+const multer = require('multer');
+const path = require('path');
+const crypto = require('crypto');
+
+const getExtension = (file) => {
+  // this function gets the filename extension by determining mimetype. To be exanded to support others, for example .jpeg or .tiff
+  var res = '';
+  if (file.mimetype === 'image/jpeg') res = '.jpg';
+  if (file.mimetype === 'image/png') res = '.png';
+  return res;
+};
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname + '-' + Date.now() + getExtension(file));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+});
 
 exports.create = async (req, res) => {
-  if (!req.body.content) {
-    return res.status(400).send({
-      message: 'Post content can not be empty',
-    });
-  }
-
-  const post = new Post({
-    title: req.body.title || 'Untitled Post',
-    content: req.body.content,
-    image: req.file.path,
-  });
-
   try {
-    const savedPost = await post.save();
-    res.send(savedPost);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message || 'Some error occurred while creating the post.',
+    console.log(req.file, req.body);
+    const { title, date } = req.body;
+    const imagePath = req.file.path;
+
+    const post = new Posts({
+      title,
+      date,
+      imagePath,
+    });
+
+    await post.save();
+
+    return res.status(200).json({
+      success: true,
+      post,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: error,
     });
   }
 };
 
-exports.getPost = async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (!post) return res.status(404).json({ message: 'Post not found' });
-    res.json(post);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+exports.upload = upload.single('imagePath');
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
-    res.json(posts);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const posts = await Posts.find();
+    return res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: error,
+    });
   }
 };
