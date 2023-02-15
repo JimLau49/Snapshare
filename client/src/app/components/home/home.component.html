@@ -1,5 +1,3 @@
-<div class="post__container">
-    <div class="post__info">
-        <p>home</p>
-    </div>
-</div>
+<div class="post__container" *ngFor="let post of posts">
+    <app-post [post]="post"></app-post>
+  </div>
