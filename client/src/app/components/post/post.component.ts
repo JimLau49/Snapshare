@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 export class PostComponent {
   
   @Input() post: any;
-  // getImageSource() {
-  //   return `data:image/jpeg;base64,${this.post.image.toString('base64')}`;
-  // }
+  @Input() formattedDate: Date;
+  postURI = 'http://localhost:3000/'
+  
 }
