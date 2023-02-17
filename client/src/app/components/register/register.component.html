@@ -2,6 +2,13 @@
   <h2>Register</h2>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="form-field">
+      <input matInput type="username" formControlName="username" placeholder="username">
+      <mat-error *ngIf="f['username'].invalid && submitted">
+        <mat-error *ngIf="f['username'].errors?.['username']">Username is required</mat-error>
+
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field">
       <input matInput type="email" formControlName="email" placeholder="Email">
       <mat-error *ngIf="f['email'].invalid && submitted">
         <mat-error *ngIf="f['email'].errors?.['required']">Email is required</mat-error>
