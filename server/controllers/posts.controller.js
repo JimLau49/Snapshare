@@ -5,8 +5,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 const getExtension = (file) => {
-  // this function gets the filename extension by determining mimetype. To be exanded to support others, for example .jpeg or .tiff
-  var res = '';
+  let res = '';
   if (file.mimetype === 'image/jpeg') res = '.jpg';
   if (file.mimetype === 'image/png') res = '.png';
   return res;
@@ -60,9 +59,8 @@ exports.upload = upload.single('imagePath');
 
 exports.getPostsByUser = async (req, res) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const posts = await Posts.find({ username: decoded.username });
+    const user = req.query.username;
+    const posts = await Posts.find({ username: user });
 
     return res.status(200).json({
       success: true,
@@ -80,6 +78,26 @@ exports.getPostsByUser = async (req, res) => {
 exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Posts.find();
+    return res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: error,
+    });
+  }
+};
+
+exports.deletePost = async (req, res) => {
+  try {
+    console.log(req);
+    const id = req.query.id;
+    console.log(id);
+    const posts = await Posts.findOneAndDelete({ _id: id });
+
     return res.status(200).json({
       success: true,
       posts,

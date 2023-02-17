@@ -18,5 +18,6 @@ route.get(
   Auth.authenticateJWT,
   PostsController.getPostsByUser
 );
+route.delete('/', Auth.authenticateJWT, PostsController.deletePost);
 
 module.exports = route;

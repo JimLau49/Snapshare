@@ -30,4 +30,11 @@ export class PostService {
 
     return this.http.post<{ success: boolean, post: Post }>(`${this.baseUrl}/create`, formData ,{ headers });
   }
+
+  deletePost(id: string): Observable<{ success: boolean, posts: Post }> {
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<{ success: boolean, posts: Post }>(`${this.baseUrl}?id=${id}`, { headers });
+  }
 }
