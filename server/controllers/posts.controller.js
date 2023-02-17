@@ -30,12 +30,13 @@ const upload = multer({
 
 exports.create = async (req, res) => {
   try {
-    const { title, date } = req.body;
+    const { title, date, content } = req.body;
     const imagePath = req.file.path;
 
     const post = new Posts({
       title,
       date,
+      content,
       imagePath,
       username: req.user.username,
     });

@@ -3,6 +3,47 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const generateToken = (user) => {
+  const payload = {
+    userId: user._id,
+    username: user.username,
+  };
+  const options = {
+    expiresIn: '1h',
+  };
+  return jwt.sign(payload, process.env.JWT_SECRET, options);
+};
+
+exports.renewToken = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decodedToken.userId);
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid token',
+      });
+    }
+
+    const newToken = generateToken(user);
+
+    return res.status(200).json({
+      success: true,
+      token: newToken,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error,
+    });
+  }
+};
+
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;

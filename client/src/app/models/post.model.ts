@@ -1,6 +1,7 @@
 export interface Post {
-    // id: number;
-    title: string;
-    date: Date;
-    imagePath: string;
+  title: string;
+  content: string;
+  formattedDate?: string;
+  date: Date;
+  file?: File | FormData;
   }

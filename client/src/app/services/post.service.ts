@@ -23,4 +23,11 @@ export class PostService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<Post[]>(`${this.baseUrl}/user/${username}`, { headers });
   }
+
+  createPost(formData: FormData): Observable<{success: boolean, post: Post}>{
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post<{ success: boolean, post: Post }>(`${this.baseUrl}/create`, formData ,{ headers });
+  }
 }

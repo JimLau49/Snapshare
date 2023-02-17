@@ -1,7 +1,9 @@
-<div class="post__info">
-    <img [src]="post.imagePath" alt="{{ post.title }}"/>
+<div class="post__container">
+  <img class="post__image" [src]="postURI + post.imagePath" alt="{{ post.title }}" />
     <div class="post__title">
       <span>{{ post.title }}</span>
-      <span class="post__date">{{ post.date }}</span>
+      <span>{{post.content}}
+      </span>
+      <span class="post__date">{{ post.formattedDate }}</span>
     </div>
   </div>

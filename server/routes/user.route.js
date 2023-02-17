@@ -11,4 +11,8 @@ route.post('/login', (req, res) => {
   userController.login(req, res);
 });
 
+route.post('/renewToken', (req, res) => {
+  userController.renewToken(req, res);
+});
+
 module.exports = route;

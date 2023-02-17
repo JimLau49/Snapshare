@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Create Post</h2>
+<div mat-dialog-content>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Title" required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput formControlName="content" placeholder="Content" required></textarea>
+    </mat-form-field>
+      <input type="file" (change)="onFileChanged($event)" required>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="postForm.invalid" (click)="onSubmit()">Create Post</button>
+</div>
