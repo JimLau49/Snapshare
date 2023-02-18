@@ -20,6 +20,7 @@ export class CreatePostComponent {
   file: File;
   date: string;
   postForm: FormGroup;
+  previewImage: string;
 
   constructor(
     public dialogRef: MatDialogRef<CreatePostComponent>, 
@@ -63,7 +64,14 @@ export class CreatePostComponent {
   }
 
   onFileChanged(event: any) {
-    this.file = event.target.files[0];
-    this.postForm.patchValue({ file: this.file });
+    const file = event.target.files[0];
+    this.file = file;
+    this.postForm.patchValue({ file });
+  
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewImage = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }
