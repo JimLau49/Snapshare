@@ -5,7 +5,8 @@
       <span>{{post.content}}
       </span>
       <span>{{post._id}}</span>
-      <button mat-icon-button color="black" aria-label="Delete post" (click)="openDeleteDialog()">
+      <span>{{post.username}}</span>
+      <button mat-icon-button color="black" aria-label="Delete post" (click)="onDeletePost()">
         <mat-icon>delete</mat-icon>
       </button>
       <span class="post__date">{{ post.formattedDate }}</span>

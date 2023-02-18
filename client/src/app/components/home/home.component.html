@@ -1,6 +1,6 @@
-<div>
+<div class="create_post_container">
   <button mat-raised-button (click)="openCreatePostDialog()">Create Post</button>
 </div>
-<div class="post__container" *ngFor="let post of posts">
+<div class="post__container" *ngFor="let post of posts.slice().reverse()">
     <app-post [post]="post"></app-post>
 </div>
