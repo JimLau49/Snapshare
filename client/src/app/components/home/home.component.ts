@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.postService.getAllPosts().subscribe((data) => {
       this.posts = data.posts.map((post) => {
         post.formattedDate = moment(post.date).format('LL');
-        console.log(post)
         return post;
       });
     });

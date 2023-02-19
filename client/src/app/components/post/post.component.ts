@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { PostService } from 'src/app/services/post.service';
 import * as moment from 'moment';
 @Component({

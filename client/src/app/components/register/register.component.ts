@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router';
 
@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) { }
-
+  
+ 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       username: ['',Validators.required,Validators.minLength(4)],

@@ -1,0 +1,13 @@
+.create-dialog{
+    display: flex;
+    flex-direction: column;
+}
+.preview{
+    &__text{
+        margin-top: 1em;
+    }
+    &__image{
+        width: 4em;
+        height: 5em;
+    }
+}

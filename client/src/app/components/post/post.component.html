@@ -1,14 +1,14 @@
-<div class="post__card">
+<div class="post">
   <img class="post__image" [src]="postURI + post.imagePath" alt="{{ post.title }}" />
-    <div class="post__title">
-      <span>{{ post.title }}</span>
-      <span>{{post.content}}
-      </span>
-      <span>{{post._id}}</span>
-      <span>{{post.username}}</span>
+    <div class="post__info">
+      <span class="title">{{ post.title }}</span>
+      <div class="user-container">
+        <span class="username">@{{post.username}}</span>
+        <span class="date">{{ post.formattedDate }}</span>
+      </div>
+      <span class="content">{{post.content}}</span>
+    </div>
       <button mat-icon-button color="black" aria-label="Delete post" (click)="onDeletePost()">
         <mat-icon>delete</mat-icon>
       </button>
-      <span class="post__date">{{ post.formattedDate }}</span>
-    </div>
 </div>
