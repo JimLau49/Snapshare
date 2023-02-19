@@ -13,5 +13,5 @@ Photo sharing app created to learn the MEAN stack.
    - `cd client && npm i`
    - `cd server && npm i`
 3. Run the client
-   - `cd client && ng serve --port <port>
+   - `cd client && ng serve --port <port>`
    - `cd server && nodemon app.js`
