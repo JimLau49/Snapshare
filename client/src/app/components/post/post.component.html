@@ -3,7 +3,7 @@
     <div class="post__info">
       <span class="title">{{ post.title }}</span>
       <div class="user-container">
-        <span class="username">@{{post.username}}</span>
+        <a class="username" routerLink="../user/{{ post.username }}">@{{post.username}}</a>
         <span class="date">{{ post.formattedDate }}</span>
       </div>
       <span class="content">{{post.content}}</span>

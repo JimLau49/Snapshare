@@ -1,0 +1,4 @@
+<h2 class="user-posts-title">{{username}}'s posts</h2>
+<div class="post__container" *ngFor="let post of posts.slice().reverse()">
+    <app-post [post]="post"></app-post>
+</div>
