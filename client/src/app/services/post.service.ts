@@ -20,10 +20,11 @@ export class PostService {
     return this.http.get<{ success: boolean, posts: Post[] }>(`${this.baseUrl}/`, { headers });
   }
 
-  getPostsByUser(username: string): Observable<Post[]> {
+  getPostsByUser(username: string | null): Observable<{success: boolean, posts: Post[]}>
+  {
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Post[]>(`${this.baseUrl}/user/${username}`, { headers });
+    return this.http.get<{ success: boolean, posts: Post[] }>(`${this.baseUrl}/user?username=${username}`, { headers });
   }
 
   createPost(formData: FormData): Observable<{success: boolean, post: Post}>{

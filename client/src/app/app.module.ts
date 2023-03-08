@@ -23,6 +23,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { UserPostComponent } from './components/user-post/user-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     HomeComponent,
     PostComponent,
     CreatePostComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UserPostComponent
   ],
   imports: [
     AppRoutingModule,
